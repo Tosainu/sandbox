@@ -6,5 +6,6 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-      - run: stack --version
-      - run: stack exec ghc -- --version
+      - run: stack --no-terminal --version
+      - run: stack --no-terminal exec ghc -- --version
+      - run: ls -als
