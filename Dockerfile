@@ -1,4 +1,4 @@
-FROM base/archlinux
+FROM archlinux
 
 RUN \
   echo 'Server = https://jpn.mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist && \

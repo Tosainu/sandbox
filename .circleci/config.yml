@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t $IMAGE_NAME:latest .
+      - run: docker build --pull -t $IMAGE_NAME:latest .
 
   publish:
     docker:
