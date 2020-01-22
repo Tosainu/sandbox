@@ -12,3 +12,8 @@ jobs:
       - run: cat /etc/os-release
       - run: gcc --version
       - run: clang --version
+
+      - run: ls -las
+
+      - run: cat /proc/cpuinfo
+      - run: cat /proc/meminfo
