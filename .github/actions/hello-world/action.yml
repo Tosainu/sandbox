@@ -1,0 +1,9 @@
+name: Hello World
+description: 'Print "Hello. World!"'
+runs:
+  using: docker
+  image: docker://alpine:latest
+  args:
+    - echo
+    - 'Hello, World!'
+
