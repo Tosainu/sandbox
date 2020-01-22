@@ -8,6 +8,8 @@ jobs:
       IMAGE_NAME: myon/actions-test
 
     steps:
+      - uses: actions/checkout@v2
+
       - run: docker build --pull -t $IMAGE_NAME:latest .
 
       - run: docker login -u "$DOCKER_USER" --password-stdin <<< "$DOCKER_PASSWORD" 
