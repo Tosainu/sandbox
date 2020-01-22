@@ -1,0 +1,22 @@
+name: Build
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: myon/actions-test
+
+    steps:
+      - run: docker build --pull -t $IMAGE_NAME:latest .
+
+      - run: docker login -u "$DOCKER_USER" --password-stdin <<< "$DOCKER_PASSWORD" 
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - run: |
+          tag=$(date -u +%Y%m%d)
+          docker tag $IMAGE_NAME:latest $IMAGE_NAME:$tag
+          docker push $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:$tag
