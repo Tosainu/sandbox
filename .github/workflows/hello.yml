@@ -6,5 +6,6 @@ jobs:
     name: Greeting
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        uses: ./.github/actions/hello-world
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/actions/hello-world
