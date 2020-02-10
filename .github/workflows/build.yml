@@ -5,20 +5,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: myon/actions-test
+      IMAGE_NAME: docker.pkg.github.com/tosainu/sandbox/actions-test
 
     steps:
       - uses: actions/checkout@v2
 
       - run: docker build --pull -t $IMAGE_NAME:latest .
 
-      - run: docker login -u "$DOCKER_USER" --password-stdin <<< "$DOCKER_PASSWORD" 
+      - name: Push container images
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          USERNAME: $GITHUB_ACTOR
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker login docker.pkg.github.com -u "$USERNAME" --password-stdin <<< "$PASSWORD"
 
-      - run: |
           tag=$(date -u +%Y%m%d)
           docker tag $IMAGE_NAME:latest $IMAGE_NAME:$tag
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$tag
+
+          rm -rf ~/.docker
