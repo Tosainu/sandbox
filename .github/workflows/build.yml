@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker build --pull -t $IMAGE_NAME:latest $DOCKERFILE_DIR
+      - run: docker build --pull -t $IMAGE_NAME:myon $DOCKERFILE_DIR
 
       - name: Push container images
         env:
@@ -30,9 +30,6 @@ jobs:
         run: |
           docker login docker.pkg.github.com -u "$USERNAME" --password-stdin <<< "$PASSWORD"
 
-          tag=$(date -u +%Y%m%d)
-          docker tag $IMAGE_NAME:latest $IMAGE_NAME:$tag
-          docker push $IMAGE_NAME:latest
-          docker push $IMAGE_NAME:$tag
+          docker push $IMAGE_NAME:myon
 
           rm -rf ~/.docker
