@@ -1,20 +1,31 @@
 name: Build
-on: [push]
+on:
+  push:
+    paths:
+      - ".github/workflows/build.yaml"
+      - "**/Dockerfile"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dockerfile:
+          - actions-test
+
     env:
-      IMAGE_NAME: docker.pkg.github.com/tosainu/sandbox/actions-test
+      DOCKERFILE_DIR: ${{ matrix.dockerfile }}
+      IMAGE_NAME: docker.pkg.github.com/${{ github.repository }}/${{ matrix.dockerfile }}
 
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker build --pull -t $IMAGE_NAME:latest .
+      - run: docker build --pull -t $IMAGE_NAME:latest $DOCKERFILE_DIR
 
       - name: Push container images
         env:
-          USERNAME: $GITHUB_ACTOR
+          USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker login docker.pkg.github.com -u "$USERNAME" --password-stdin <<< "$PASSWORD"
