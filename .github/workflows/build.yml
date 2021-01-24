@@ -16,7 +16,7 @@ jobs:
 
     env:
       DOCKERFILE_DIR: ${{ matrix.dockerfile }}
-      IMAGE_NAME: docker.pkg.github.com/${{ github.repository }}/${{ matrix.dockerfile }}
+      IMAGE_NAME: docker.pkg.github.com/tosainu/sandbox/${{ matrix.dockerfile }}
 
     steps:
       - uses: actions/checkout@v2
