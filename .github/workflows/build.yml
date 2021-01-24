@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     paths:
-      - ".github/workflows/build.yaml"
+      - ".github/workflows/build.yml"
       - "**/Dockerfile"
 
 jobs:
