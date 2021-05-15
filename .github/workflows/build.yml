@@ -9,14 +9,16 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GH_PKG_PASSWORD }}
+    defaults:
+      run:
+        shell: bash
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
-      - run: cat /etc/os-release
-      - run: gcc --version
-      - run: clang --version
-
-      - run: ls -las
-
-      - run: cat /proc/cpuinfo
-      - run: cat /proc/meminfo
+      - run: |
+        set -x
+        cat /etc/os-release
+        clang-format --version
+        ls -las
+        cat /proc/cpuinfo
+        cat /proc/meminfo
