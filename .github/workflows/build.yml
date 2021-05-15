@@ -16,9 +16,9 @@ jobs:
       - uses: actions/checkout@main
 
       - run: |
-        set -x
-        cat /etc/os-release
-        clang-format --version
-        ls -las
-        cat /proc/cpuinfo
-        cat /proc/meminfo
+          set -x
+          cat /etc/os-release
+          clang-format --version
+          ls -las
+          cat /proc/cpuinfo
+          cat /proc/meminfo
