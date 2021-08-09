@@ -5,10 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: docker.pkg.github.com/kiksworks/docker-build-env/build-env
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GH_PKG_PASSWORD }}
+      image: ghcr.io/kiksworks/simplecheck-env
     defaults:
       run:
         shell: bash
