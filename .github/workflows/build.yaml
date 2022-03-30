@@ -15,4 +15,12 @@ jobs:
           platforms: arm64
       - uses: docker/setup-buildx-action@master
 
-      - run: docker buildx build --platform="${{ steps.qemu.outputs.platforms }}" -t uname-test .
+      - name: Build and push
+        env:
+          REGISTRY: ghcr.io
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker login "$REGISTRY" -u "$USERNAME" --password-stdin <<< "$PASSWORD"
+          docker buildx build --platform="${{ steps.qemu.outputs.platforms }}" --push -t "$REGISTRY/tosainu/buildx-test:latest" .
+          rm -rf ~/.docker
