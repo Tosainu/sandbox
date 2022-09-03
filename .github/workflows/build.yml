@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Merge develop branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git merge --ff-only origin/develop
+          git push
