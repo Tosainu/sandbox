@@ -1,0 +1,13 @@
+name: Env Expression
+on:
+  push:
+
+jobs:
+  nyan:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "$FOO" "$BAR"
+        env:
+          FOO: ${{ github.ref == 'refs/heads/master' }}
+          BAR: ${{ github.ref == 'refs/heads/actions/env-expression' }}
+
