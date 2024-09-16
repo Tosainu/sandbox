@@ -7,5 +7,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: df -hT
-      - run: ls -l /opt
+
+      - run: sudo apr-get purge -y aspnetcore-* clang-* dotnet-* google-chrome-* llvm-* mono-* mysql-* php* r-*
+      - run: sudo apt-get autoremove
       - run: dpkg -l
+      - run: df -hT
+
+      - run: ls -la /usr/local
+      - run: ls -la /opt
