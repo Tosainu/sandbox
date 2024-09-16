@@ -8,7 +8,7 @@ jobs:
     steps:
       - run: df -hT
 
-      - run: sudo apr-get purge -y aspnetcore-* clang-* dotnet-* google-chrome-* llvm-* mono-* mysql-* php* r-*
+      - run: sudo apt-get purge -y aspnetcore-* clang-* dotnet-* google-chrome-* llvm-* mono-* mysql-* php* r-*
       - run: sudo apt-get autoremove
       - run: dpkg -l
       - run: df -hT
