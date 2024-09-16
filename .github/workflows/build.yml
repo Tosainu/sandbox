@@ -1,0 +1,11 @@
+name: nyan
+on:
+  push:
+
+jobs:
+  nyan:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: df -hT
+      - run: ls -l /opt
+      - run: dpkg -l
