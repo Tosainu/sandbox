@@ -13,5 +13,7 @@ jobs:
       - run: dpkg -l
       - run: df -hT
 
-      - run: ls -la /usr/local
-      - run: ls -la /opt
+      - run: sudo rm -rf /usr/local/.ghcup /usr/local/julia*
+      - run: df -hT
+
+      - run: ls -la /usr/local/lib
