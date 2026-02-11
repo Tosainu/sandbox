@@ -16,6 +16,7 @@ jobs:
         with:
           repository: Tosainu/infra
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
       - run: gh repo view
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
@@ -27,6 +28,7 @@ jobs:
           git add -A
           git commit -m 'Hello World!'
           git show
-      - run: gh pr create -B main -H automated/update-from-github-actions -t 'Hello World!' -b 'Create PR from GitHub Actions!'
+          git push -u origin HEAD
+      - run: gh pr create -B main -t 'Hello World!' -b 'Create PR from GitHub Actions!'
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
