@@ -20,3 +20,11 @@ jobs:
       - run: gh repo view
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+      - run: |
+          git switch -c automated/update-from-github-actions
+          echo 'Nyan!!!!!!' > README.md
+          git add -A
+          git commit -m 'Hello World!'
+      - run: gh pr create -B main -t 'Hello World!' -b 'Create PR from GitHub Actions!'
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
