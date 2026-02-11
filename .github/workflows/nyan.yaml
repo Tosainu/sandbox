@@ -1,0 +1,20 @@
+name: Nyan
+on:
+  push:
+
+jobs:
+  nyan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/create-github-app-token@v2.2.1
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          repositories: |
+            Tosainu/infra
+      - uses: actions/checkout@v6.0.2
+        with:
+          repository: Tosainu/infra
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
