@@ -1,0 +1,9 @@
+name: Build
+on:
+  push:
+
+jobs:
+  name:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - run: echo Hello, World!
